@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>UAT IFrame HOST</title>
+
+	<!-- For code sample syntax highlighting -->
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body class="claro">
+
+	<div id="prefill">
+		<h2>Prefill Query Demo</h2>
+		Note: If you want this functionality on your site using iframe embed an ID on the iframe is required and some javascript.<br>
+	 See the code at the bottom of this page.
+	 <p>
+		<!-- /// UAT New Tab. Copy from Here /// -->
+		<a href="http://qat.winwebconnect.com/api/v1/uat/whitelabel?awb=01614800601" target="_blank">Open Prefilled UAT Search in a new Browser Tab</a>
+		<!-- /// UAT New Tab. Copy to Here /// -->
+	</div>
+
+
+	<div id="popup">
+		<h2>Popup Option Demo</h2>
+		<!-- /// UAT Popup. Copy From Here /// -->
+		<script>
+			var UATpopup = null;
+
+			function popUpWINUAT() {
+				if (UATpopup == null || UATpopup.closed) {
+					UATpopup = window.open(
+						'http://qat.winwebconnect.com/api/v1/uat/whitelabel', 'WINUAT',
+						'resizable,status=0,toolbar=0,location=0,menubar=0,height=600,width=800');
+				}
+				if (window.focus) {
+					UATpopup.focus();
+				}
+				return false;
+			}
+		</script>
+		<a href="http://qat.winwebconnect.com/api/v1/uat/whitelabel" onclick="return popUpWINUAT()" target="WINUAT">
+				Open UAT Search in PopUp
+			</a>
+		<!-- /// UAT Popup. Copy to Here /// -->
+	</div>
+
+	<div id="newtab">
+		<h2>New Tab Option Demo</h2>
+		<!-- /// UAT New Tab. Copy from Here /// -->
+		<a href="http://qat.winwebconnect.com/api/v1/uat/whitelabel" target="_blank">Open UAT Search in a new Browser Tab</a>
+		<!-- /// UAT New Tab. Copy to Here /// -->
+	</div>
+
+	<div id="custom_css_newtab">
+		<h2>Custom CSS New Tab Option Demo</h2>
+		<!-- /// UAT New Tab. Copy from Here /// -->
+		<a href="http://qat.winwebconnect.com/api/v1/uat/whitelabel?css=http://qat.winwebconnect.com/src/win/test/widget/functional/wl_custom.css" target="_blank">Open Custom CSS enhanced UAT Search in a new Browser Tab</a>
+		<!-- /// UAT New Tab. Copy to Here /// -->
+	</div>
+
+	<div id="custom_quota_newtab">
+		<h2>Customize Quotas and affiliates New Tab Option Demo</h2>
+		<!-- /// UAT New Tab. Copy from Here /// -->
+		<a href="http://qat.winwebconnect.com/api/v1/uat/whitelabel?quota=5&quotaPeriod=1h&hostPartner=Lognet%20Global%20Network" target="_blank">Open  in a new Browser Tab</a>
+		<!-- /// UAT New Tab. Copy to Here /// -->
+	</div>
+
+
+	<div id="iframehost">
+		<h2>IFrame Option Demo</h2>
+		This shows how to support linking directly to a query by simply appending
+		?awb=00108334970 to the host page URL.
+
+		<p>Try it: <a href=".?awb=00108334970">AWB 00108334970</a>
+		<p><b>Make sure that the iframe id matches the id used in document.getElementById.</b>
+		<pre><code id="iframe_directlink_sample_codeview" class="html"></code></pre>
+
+		<div id="iframe_directlink_sample">
+<!-- /// UAT IFrame. Copy from here /// -->
+<!-- The id of the iframe MUST match the id used below to set url of the iframe -->
+<iframe id="iframeWL" style="border: 0" height="600px" width="800px" src=""></iframe>
+
+<script>
+	// This url should point to the environment that you are using, such as:
+	// "https://www.winwebconnect.com/api/v1/uat/whitelabel"
+	var baseurl = "http://qat.winwebconnect.com/api/v1/uat/whitelabel";
+
+	// Find the iframe by id, it MUST match what is set in the iframe element
+	// Set the URL the iframe should load
+	document.getElementById('iframeWL').src = baseurl + window.location.search;
+</script>
+<!-- /// UAT IFrame. Copy to Here /// -->
+		</div>
+	</div>
+
+	<script>
+		function htmlEscape(str) {
+			return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\//g, '&#x2F;');
+		}
+		var gbid = document.getElementById.bind(document);
+		['iframe_directlink_sample'].forEach(function(codeCont) {
+			gbid(codeCont + '_codeview').innerHTML = htmlEscape(gbid(codeCont).innerHTML);
+		});
+	</script>
+</body>
+
+</html>
